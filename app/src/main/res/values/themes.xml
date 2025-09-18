@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Inherit from Material 3 DayNight -->
+    <style name="Theme.Svastha" parent="Theme.Material3.DayNight">
+        <!-- Remove the action bar (for Compose) -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>
