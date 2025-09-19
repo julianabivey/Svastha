@@ -20,7 +20,7 @@ object NetworkModule {
     }).build()
   @Provides @Singleton fun retrofit(json: Json, client: OkHttpClient): Retrofit =
     Retrofit.Builder()
-      .baseUrl("http://10.0.2.2:8080")
+      .baseUrl("http://10.0.2.2:8080/")
       .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
       .client(client).build()
   @Provides @Singleton fun api(retrofit: Retrofit): SvasthaApi = retrofit.create(SvasthaApi::class.java)

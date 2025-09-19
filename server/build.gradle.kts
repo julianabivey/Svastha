@@ -1,6 +1,6 @@
 plugins {
   kotlin("jvm") ; application
-  id("org.jetbrains.kotlin.plugin.compose") // ← no version here; version is defined in root
+  kotlin("plugin.serialization")
 }
 
 kotlin {
