@@ -3,10 +3,20 @@ package com.yuli.svastha.ui.dashboard
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.*
+
+import com.patrykandpatrick.vico.compose.cartesian.CartesianChartHost
+import com.patrykandpatrick.vico.compose.cartesian.axis.rememberBottom
+import com.patrykandpatrick.vico.compose.cartesian.axis.rememberStart
+import com.patrykandpatrick.vico.compose.cartesian.rememberCartesianChart
+import com.patrykandpatrick.vico.compose.cartesian.layer.rememberColumnCartesianLayer
+import com.patrykandpatrick.vico.core.cartesian.axis.HorizontalAxis
+import com.patrykandpatrick.vico.core.cartesian.axis.VerticalAxis
+import com.patrykandpatrick.vico.core.cartesian.data.CartesianChartModel
+import com.patrykandpatrick.vico.core.cartesian.data.ColumnCartesianLayerModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,4 +59,28 @@ fun DashboardScreen(
       }
     }
   }
+
+  val chart = rememberCartesianChart(
+    rememberColumnCartesianLayer(),
+    startAxis = VerticalAxis.rememberStart(),
+    bottomAxis = HorizontalAxis.rememberBottom(),
+  )
+
+  val model = remember {
+    CartesianChartModel(
+      ColumnCartesianLayerModel.build {
+        // sample data; replace with your real points
+        series(1, 2, 4, 8, 3, 10, 4, 7, 2, 6, 4, 8)
+      }
+    )
+  }
+
+  CartesianChartHost(
+    chart = chart,
+    model = model,
+    modifier = Modifier
+      .fillMaxWidth()
+      .height(180.dp)
+      .padding(16.dp)
+  )
 }
