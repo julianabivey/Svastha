@@ -1,28 +1,30 @@
 [versions]
 # Tooling
-agp = "8.6.0"
-kotlin = "2.0.20"
+agp = "8.7.2"
+kotlin = "2.1.0"
+ksp = "2.1.0-1.0.28"
 
-# Compose
-compose-bom = "2024.09.01"   # Works with Kotlin 2.0.20 / compiler 1.6.0
+# Compose & Charts
+compose-bom = "2024.12.01"   # Pinned to UI 1.7.6; works with Kotlin 2.1.x / compiler 1.7.3
+vico = "2.0.0"
 
 # Material
 material = "1.12.0"
 
 # Kotlin libs
-coroutines = "1.9.0"
+coroutines = "1.10.1"
 serialization = "1.7.1"
 
 # AndroidX
 lifecycle = "2.8.4"
 activity-compose = "1.9.2"
 navigation-compose = "2.8.0"
-room = "2.6.1"
+room = "2.8.1"
 datastore = "1.1.1"
 work = "2.9.1"
 
 # DI
-hilt = "2.52"
+hilt = "2.55"
 hilt-navigation = "1.2.0"
 
 # Networking
@@ -37,7 +39,12 @@ compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 compose-activity = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
+
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+# Vico (charts)
+vico-core = { module = "com.patrykandpatrick.vico:core", version.ref = "vico" }
+vico-compose = { module = "com.patrykandpatrick.vico:compose", version.ref = "vico" }
 
 # Kotlin core
 coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
@@ -72,3 +79,4 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }

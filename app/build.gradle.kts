@@ -3,7 +3,9 @@ plugins {
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.hilt)
-  id("org.jetbrains.kotlin.plugin.compose") // ← no version here; version is defined in root
+  alias(libs.plugins.ksp)
+  // Version comes from the root build.gradle.kts
+  id("org.jetbrains.kotlin.plugin.compose")
   id("kotlin-kapt")
 }
 
@@ -21,22 +23,32 @@ android {
     vectorDrawables { useSupportLibrary = true }
   }
 
-  buildFeatures { compose = true }
+  buildFeatures {
+    compose = true
+  }
 
-  // For Kotlin 2.0.20 use Compose compiler 1.6.10
-  composeOptions { kotlinCompilerExtensionVersion = "1.6.10" }
+  // Match Compose UI 1.7.x from your BOM
+  composeOptions {
+    kotlinCompilerExtensionVersion = "1.7.3"
+  }
 
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
   }
-  kotlinOptions { jvmTarget = "17" }
 
-  // Make all Kotlin (incl. kapt) use JDK 17
-  kotlin { jvmToolchain(17) }
+  kotlinOptions {
+    jvmTarget = "17"
+  }
+
+  // Ensure all Kotlin tasks (including kapt) use JDK 17
+  kotlin {
+    jvmToolchain(17)
+  }
 }
 
 dependencies {
+  // Compose (BOM controls versions of compose artifacts)
   implementation(platform(libs.compose.bom))
   implementation(libs.compose.ui)
   implementation(libs.compose.ui.tooling)
@@ -45,6 +57,11 @@ dependencies {
   implementation(libs.compose.navigation)
   implementation(libs.material)
 
+  // Charts
+  implementation(libs.vico.core)
+  implementation(libs.vico.compose)
+
+  // Kotlinx / Coroutines / Lifecycle
   implementation(libs.coroutines.core)
   implementation(libs.coroutines.android)
   implementation(libs.serialization.json)
@@ -65,11 +82,14 @@ dependencies {
   // Room (kapt)
   implementation(libs.room.runtime)
   implementation(libs.room.ktx)
-  kapt(libs.room.compiler)
+  //kapt(libs.room.compiler)
+  ksp(libs.room.compiler)
 
+  // DataStore / WorkManager
   implementation(libs.datastore.prefs)
   implementation(libs.work.runtime)
 
+  // Test
   testImplementation("junit:junit:4.13.2")
   androidTestImplementation("androidx.test.ext:junit:1.2.1")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
