@@ -28,13 +28,13 @@ class MockBiometricsRepository @Inject constructor(
       db.summaryDao().upsert(
         SummaryEntity(
           date = sum.date,
-          hrMin = sum.heartRate["min"] ?: 0.0,
-          hrAvg = sum.heartRate["avg"] ?: 0.0,
-          hrMax = sum.heartRate["max"] ?: 0.0,
-          hrRest = sum.heartRate["resting"] ?: 0.0,
-          rrMin = sum.respiratoryRate["min"] ?: 0.0,
-          rrAvg = sum.respiratoryRate["avg"] ?: 0.0,
-          rrMax = sum.respiratoryRate["max"] ?: 0.0,
+          hrMin = sum.heartRate["min"] ?: 0.0f,
+          hrAvg = sum.heartRate["avg"] ?: 0.0f,
+          hrMax = sum.heartRate["max"] ?: 0.0f,
+          hrRest = sum.heartRate["resting"] ?: 0.0f,
+          rrMin = sum.respiratoryRate["min"] ?: 0.0f,
+          rrAvg = sum.respiratoryRate["avg"] ?: 0.0f,
+          rrMax = sum.respiratoryRate["max"] ?: 0.0f,
         )
       )
     }

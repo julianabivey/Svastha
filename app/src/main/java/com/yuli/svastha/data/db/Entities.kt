@@ -7,12 +7,12 @@ data class SampleEntity(
   @PrimaryKey(autoGenerate = true) val id: Long = 0,
   val metric: String, // "heartRateBpm" | "respiratoryRateBpm"
   val ts: String,
-  val value: Double
+  val value: Float
 )
 
 @Entity(tableName = "daily_summary")
 data class SummaryEntity(
   @PrimaryKey val date: String,
-  val hrMin: Double, val hrAvg: Double, val hrMax: Double, val hrRest: Double,
-  val rrMin: Double, val rrAvg: Double, val rrMax: Double
+  val hrMin: Float, val hrAvg: Float, val hrMax: Float, val hrRest: Float,
+  val rrMin: Float, val rrAvg: Float, val rrMax: Float
 )

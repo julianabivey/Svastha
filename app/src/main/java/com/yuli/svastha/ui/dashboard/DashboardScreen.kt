@@ -51,36 +51,61 @@ fun DashboardScreen(
             "Respiratory rate (avg 24h): ${state.rrAvg ?: "--"} bpm",
             style = MaterialTheme.typography.titleLarge
           )
-          Text(
-            "This is the starter UI. Add charts & thresholds next.",
-            style = MaterialTheme.typography.bodyMedium
-          )
+
+          if (state.heartRateSeries.isNotEmpty()) {
+            val chart = rememberCartesianChart(
+              rememberColumnCartesianLayer(),
+              startAxis = VerticalAxis.rememberStart(),
+              bottomAxis = HorizontalAxis.rememberBottom(),
+            )
+
+            val model = remember(state.heartRateSeries) {
+              CartesianChartModel(
+                ColumnCartesianLayerModel.build {
+                  series(state.heartRateSeries)
+                }
+              )
+            }
+
+            CartesianChartHost(
+              chart = chart,
+              model = model,
+              modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp)
+                .padding(24.dp)
+            )
+          } else {
+            Text(
+              "No chart data available.",
+              style = MaterialTheme.typography.bodyMedium
+            )
+          }
         }
       }
     }
   }
 
-  val chart = rememberCartesianChart(
-    rememberColumnCartesianLayer(),
-    startAxis = VerticalAxis.rememberStart(),
-    bottomAxis = HorizontalAxis.rememberBottom(),
-  )
+//  val chart = rememberCartesianChart(
+//    rememberColumnCartesianLayer(),
+//    startAxis = VerticalAxis.rememberStart(),
+//    bottomAxis = HorizontalAxis.rememberBottom(),
+//  )
 
-  val model = remember {
-    CartesianChartModel(
-      ColumnCartesianLayerModel.build {
-        // sample data; replace with your real points
-        series(1, 2, 4, 8, 3, 10, 4, 7, 2, 6, 4, 8)
-      }
-    )
-  }
-
-  CartesianChartHost(
-    chart = chart,
-    model = model,
-    modifier = Modifier
-      .fillMaxWidth()
-      .height(180.dp)
-      .padding(16.dp)
-  )
+//  val model = remember(state.heartRateSeries) {
+//    CartesianChartModel(
+//      ColumnCartesianLayerModel.build {
+//        series(state.heartRateSeries)
+//      }
+//    )
+//  }
+//
+//  CartesianChartHost(
+//    chart = chart,
+//    model = model,
+//    modifier = Modifier
+//      .fillMaxWidth()
+//      .height(180.dp)
+//      .padding(24.dp)
+//  )
 }

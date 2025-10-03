@@ -11,12 +11,12 @@ import kotlinx.serialization.Serializable
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 
-@Serializable data class Sample(val ts: String, val value: Double)
+@Serializable data class Sample(val ts: String, val value: Float)
 @Serializable data class Series(val metric: String, val samples: List<Sample>)
 @Serializable data class Summary(
   val date: String,
-  val heartRate: Map<String, Double>,
-  val respiratoryRate: Map<String, Double>
+  val heartRate: Map<String, Float>,
+  val respiratoryRate: Map<String, Float>
 )
 
 fun main() { embeddedServer(Netty, port = 8080) { module() }.start(wait = true) }
@@ -34,9 +34,9 @@ private fun genSeries(metric: String): Series {
   val now = Instant.now().truncatedTo(ChronoUnit.MINUTES)
   val points = (0 until 24*6).map { i ->
     val ts = now.minus(i*10L, ChronoUnit.MINUTES).toString()
-    val base = if (metric == "heartRateBpm") 68.0 else 13.5
+    val base = if (metric == "heartRateBpm") 68.0f else 13.5f
     val jitter = listOf(-3,-2,-1,0,1,2,3).random()
-    Sample(ts, (base + jitter).coerceAtLeast(1.0))
+    Sample(ts, (base + jitter).coerceAtLeast(1.0f))
   }.reversed()
   return Series(metric, points)
 }
@@ -44,7 +44,7 @@ private fun genSeries(metric: String): Series {
 private fun genSummary(): Summary {
   return Summary(
     date = Instant.now().toString().substring(0,10),
-    heartRate = mapOf("min" to 52.0, "avg" to 68.0, "max" to 162.0, "resting" to 56.0),
-    respiratoryRate = mapOf("min" to 10.0, "avg" to 13.5, "max" to 18.0)
+    heartRate = mapOf("min" to 52.0f, "avg" to 68.0f, "max" to 162.0f, "resting" to 56.0f),
+    respiratoryRate = mapOf("min" to 10.0f, "avg" to 13.5f, "max" to 18.0f)
   )
 }
