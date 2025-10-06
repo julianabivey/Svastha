@@ -24,7 +24,6 @@ import com.patrykandpatrick.vico.core.cartesian.data.CartesianChartModel
 import com.patrykandpatrick.vico.core.cartesian.data.LineCartesianLayerModel
 import com.patrykandpatrick.vico.core.cartesian.decoration.HorizontalLine
 import com.patrykandpatrick.vico.core.common.Position
-import com.patrykandpatrick.vico.core.common.component.LineComponent
 import com.patrykandpatrick.vico.core.common.shape.CorneredShape
 import com.yuli.svastha.ui.utils.ThresholdUi
 

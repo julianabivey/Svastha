@@ -1,7 +1,6 @@
 package com.yuli.svastha.ui.utils
 
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.unit.dp
 import com.patrykandpatrick.vico.core.common.Fill
 import com.patrykandpatrick.vico.core.common.Insets
@@ -13,11 +12,6 @@ object ThresholdUi {
     val LINE_FILL = Fill.Black
     val BOX_FILL = Fill.Transparent
     val LINE_THICKNESS = 2.dp
-    val SHAPE = Shape.Rectangle
-    val MARGINS = Insets.Zero
-    //val STROKE_FILL = SolidColor(Color(LINE_FILL))
-    const val STROKE_THICKNESS_DP = 0f
-    val SHADOW = null
 }
 
 object Zones {
