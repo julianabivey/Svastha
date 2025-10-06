@@ -4,6 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.yuli.svastha.data.db.SampleEntity
 import com.yuli.svastha.data.db.SummaryEntity
 import com.yuli.svastha.data.repo.BiometricsRepository
+import com.yuli.svastha.domain.DefaultThresholds
+import com.yuli.svastha.domain.Threshold
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -22,7 +24,10 @@ data class DashboardState(
   val hrAvg: Float? = null,
   val rrAvg: Float? = null,
   val heartRateSeries: List<Float> = emptyList(),
-  val respRateSeries: List<Float> = emptyList()
+  val respRateSeries: List<Float> = emptyList(),
+  val hrThreshold: Threshold = DefaultThresholds.HR,
+  val rrThreshold: Threshold = DefaultThresholds.RR
+
 )
 
 //Todo: Collect the StateFlow before passing it to the composable.

@@ -1,0 +1,46 @@
+---
+config:
+  theme: neutral
+---
+flowchart LR
+    subgraph UI["UI (Compose)"]
+        DS["DashboardScreen"]
+        SS["SettingsScreen"]
+    end
+    subgraph VM["ViewModel"]
+        DVM["DashboardViewModel"]
+        SVM["SettingsViewModel"]
+    end
+    subgraph DOMAIN["Domain (pure Kotlin)"]
+        UC1["EvaluateThresholdUseCase"]
+        UC2["ComputeAveragesUseCase"]
+        TCFG["ThresholdConfig\n(defaults + validation)"]
+    end
+    subgraph LOCAL["Local"]
+        ROOM[("Room DB\nSamples, Summary")]
+        DSSTORE[("DataStore\nThresholds")]
+    end
+    subgraph REMOTE["Remote"]
+        API[/"Ktor Mock Server"/]
+    end
+    subgraph DATA["Data layer"]
+        R["BiometricsRepository"]
+        LOCAL
+        REMOTE
+    end
+    DS --> DVM
+    SS --> SVM
+    DVM --> UC2 & UC1 & DS
+    SVM --> TCFG & SS
+    UC2 --> R
+    UC1 --> DSSTORE
+    TCFG <--> DSSTORE
+    R <--> ROOM & API
+    style DS stroke:#FFCDD2
+    style SS stroke:#FFCDD2
+    style LOCAL fill:#C8E6C9
+    style REMOTE fill:#C8E6C9
+    style UI fill:#FFCDD2
+    style VM fill:#FFCDD2
+    style DOMAIN fill:#FFCDD2
+    style DATA fill:#FFCDD2
