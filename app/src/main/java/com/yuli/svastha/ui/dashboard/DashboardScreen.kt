@@ -13,10 +13,12 @@ import com.patrykandpatrick.vico.compose.cartesian.axis.rememberBottom
 import com.patrykandpatrick.vico.compose.cartesian.axis.rememberStart
 import com.patrykandpatrick.vico.compose.cartesian.rememberCartesianChart
 import com.patrykandpatrick.vico.compose.cartesian.layer.rememberColumnCartesianLayer
+import com.patrykandpatrick.vico.compose.cartesian.layer.rememberLineCartesianLayer
 import com.patrykandpatrick.vico.core.cartesian.axis.HorizontalAxis
 import com.patrykandpatrick.vico.core.cartesian.axis.VerticalAxis
 import com.patrykandpatrick.vico.core.cartesian.data.CartesianChartModel
 import com.patrykandpatrick.vico.core.cartesian.data.ColumnCartesianLayerModel
+import com.patrykandpatrick.vico.core.cartesian.data.LineCartesianLayerModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -54,14 +56,14 @@ fun DashboardScreen(
 
           if (state.heartRateSeries.isNotEmpty()) {
             val chart = rememberCartesianChart(
-              rememberColumnCartesianLayer(),
+              rememberLineCartesianLayer(),
               startAxis = VerticalAxis.rememberStart(),
               bottomAxis = HorizontalAxis.rememberBottom(),
             )
 
             val model = remember(state.heartRateSeries) {
               CartesianChartModel(
-                ColumnCartesianLayerModel.build {
+                LineCartesianLayerModel.build {
                   series(state.heartRateSeries)
                 }
               )
@@ -81,31 +83,41 @@ fun DashboardScreen(
               style = MaterialTheme.typography.bodyMedium
             )
           }
+
+          if (state.respRateSeries.isNotEmpty()) {
+            val chart = rememberCartesianChart(
+              rememberLineCartesianLayer(),
+              startAxis = VerticalAxis.rememberStart(),
+              bottomAxis = HorizontalAxis.rememberBottom(),
+            )
+
+            val model = remember(state.respRateSeries) {
+              CartesianChartModel(
+                LineCartesianLayerModel.build {
+                  series(state.respRateSeries)
+                }
+              )
+            }
+
+            CartesianChartHost(
+              chart = chart,
+              model = model,
+              modifier = Modifier
+                .fillMaxWidth()
+                .height(180.dp)
+                .padding(24.dp)
+            )
+          } else {
+            Text(
+              "No chart data available.",
+              style = MaterialTheme.typography.bodyMedium
+            )
+
+            }
+          }
         }
       }
     }
   }
 
-//  val chart = rememberCartesianChart(
-//    rememberColumnCartesianLayer(),
-//    startAxis = VerticalAxis.rememberStart(),
-//    bottomAxis = HorizontalAxis.rememberBottom(),
-//  )
 
-//  val model = remember(state.heartRateSeries) {
-//    CartesianChartModel(
-//      ColumnCartesianLayerModel.build {
-//        series(state.heartRateSeries)
-//      }
-//    )
-//  }
-//
-//  CartesianChartHost(
-//    chart = chart,
-//    model = model,
-//    modifier = Modifier
-//      .fillMaxWidth()
-//      .height(180.dp)
-//      .padding(24.dp)
-//  )
-}
