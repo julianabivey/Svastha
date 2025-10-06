@@ -3,8 +3,6 @@ package com.yuli.svastha.ui.utils
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.patrykandpatrick.vico.core.common.Fill
-import com.patrykandpatrick.vico.core.common.Insets
-import com.patrykandpatrick.vico.core.common.shape.Shape
 import com.yuli.svastha.domain.Zone
 
 //UI Constants
