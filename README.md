@@ -100,7 +100,6 @@ and aligned with each user’s personal sense of balance.
 ## 🤝 Project Status
 
 Currently under active solo development — **v0.x**  
-Private repo for now — feedback welcome anytime!
 
 ---
 
